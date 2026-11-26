@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing — Salesforce Admin AI Copilot</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      color: #1a1a2e;
+    }
+
+    header {
+      background: linear-gradient(135deg, #00a1e0, #0070d2);
+      color: white;
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.3px; }
+    header span.sub { font-size: 13px; opacity: 0.85; margin-left: 4px; }
+    .cloud-icon { font-size: 28px; }
+
+    header a.login-btn {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.4);
+      transition: background 0.2s;
+    }
+    header a.login-btn:hover { background: rgba(255,255,255,0.3); }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      font-weight: 800;
+      color: #0070d2;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #555;
+      max-width: 520px;
+      margin: 0 auto 16px;
+      line-height: 1.6;
+    }
+
+    .trial-badge {
+      display: inline-block;
+      background: #e8f7e8;
+      color: #2d7a2d;
+      border: 1px solid #b4deb4;
+      border-radius: 20px;
+      padding: 6px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 48px;
+    }
+
+    .plans {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      padding: 0 20px 60px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 32px;
+      width: 320px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      position: relative;
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .plan-card.popular {
+      border-color: #0070d2;
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #00a1e0, #0070d2);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .plan-name {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .plan-price {
+      font-size: 42px;
+      font-weight: 800;
+      color: #0070d2;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .plan-price sup {
+      font-size: 22px;
+      font-weight: 700;
+      vertical-align: super;
+      margin-right: 2px;
+    }
+
+    .plan-period {
+      font-size: 14px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .plan-desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      min-height: 48px;
+    }
+
+    .plan-divider {
+      border: none;
+      border-top: 1px solid #eef2f7;
+      margin-bottom: 24px;
+    }
+
+    .plan-features {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .plan-features li {
+      font-size: 14px;
+      color: #333;
+      padding: 7px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .plan-features li .check {
+      color: #0070d2;
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-features li .check.grey { color: #ccc; }
+
+    .cta-btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.1s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-btn:active { transform: scale(0.98); }
+
+    .cta-primary {
+      background: linear-gradient(135deg, #00a1e0, #0070d2);
+      color: white;
+    }
+
+    .cta-primary:hover { opacity: 0.9; }
+
+    .cta-outline {
+      background: white;
+      color: #0070d2;
+      border: 2px solid #0070d2;
+    }
+
+    .cta-outline:hover { background: #f0f8ff; }
+
+    .faq {
+      max-width: 720px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    .faq h3 {
+      font-size: 24px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 32px;
+      color: #1a1a2e;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .faq-item h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #0070d2;
+      margin-bottom: 8px;
+    }
+
+    .faq-item p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .footer {
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      padding: 24px;
+      border-top: 1px solid #e8edf3;
+    }
+
+    @media (max-width: 720px) {
+      .hero h2 { font-size: 28px; }
+      .plan-card { width: 100%; max-width: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="left">
+    <span class="cloud-icon">⚡</span>
+    <div>
+      <h1>Salesforce Admin AI Copilot <span class="sub">Beta</span></h1>
+    </div>
+  </div>
+  <a href="/" class="login-btn">Sign In →</a>
+</header>
+
+<div class="hero">
+  <h2>Simple, Transparent Pricing</h2>
+  <p>Get instant expert answers for Salesforce Flows, SOQL, Apex, Validation Rules, and more — powered by Claude AI.</p>
+  <div class="trial-badge">✅ 7-day free trial · Cancel anytime · No lock-in</div>
+</div>
+
+<div class="plans">
+
+  <!-- STARTER -->
+  <div class="plan-card">
+    <div class="plan-name">Starter</div>
+    <div class="plan-price"><sup>₹</sup>2,490</div>
+    <div class="plan-period">per month</div>
+    <div class="plan-desc">Perfect for solo Salesforce Admins who want fast, reliable AI answers daily.</div>
+    <hr class="plan-divider">
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Unlimited AI questions</li>
+      <li><span class="check">✓</span> Flows, SOQL, Apex, Validation Rules</li>
+      <li><span class="check">✓</span> Permissions & Security guidance</li>
+      <li><span class="check">✓</span> Code blocks & copy-paste ready answers</li>
+      <li><span class="check">✓</span> Email support</li>
+      <li><span class="check grey">✓</span> <span style="color:#bbb">Team sharing (Pro+)</span></li>
+    </ul>
+    <a href="https://rzp.io/rzp/Si20GwT" class="cta-btn cta-outline" target="_blank">Start Free Trial →</a>
+  </div>
+
+  <!-- PRO (POPULAR) -->
+  <div class="plan-card popular">
+    <div class="popular-badge">⭐ MOST POPULAR</div>
+    <div class="plan-name">Pro</div>
+    <div class="plan-price"><sup>₹</sup>4,900</div>
+    <div class="plan-period">per month</div>
+    <div class="plan-desc">For power users who rely on the Copilot daily and need priority responses.</div>
+    <hr class="plan-divider">
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Starter</li>
+      <li><span class="check">✓</span> Priority response speed</li>
+      <li><span class="check">✓</span> Advanced Apex & LWC support</li>
+      <li><span class="check">✓</span> Integration tips (REST API, webhooks)</li>
+      <li><span class="check">✓</span> Deployment & DevOps guidance</li>
+      <li><span class="check">✓</span> Priority email support</li>
+    </ul>
+    <a href="https://rzp.io/rzp/HLfCcFr" class="cta-btn cta-primary" target="_blank">Start Free Trial →</a>
+  </div>
+
+  <!-- TEAM -->
+  <div class="plan-card">
+    <div class="plan-name">Team</div>
+    <div class="plan-price"><sup>₹</sup>8,200</div>
+    <div class="plan-period">per month</div>
+    <div class="plan-desc">For teams and consultants who need shared access and dedicated support.</div>
+    <hr class="plan-divider">
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Pro</li>
+      <li><span class="check">✓</span> Up to 5 team seats</li>
+      <li><span class="check">✓</span> Shared workspace access</li>
+      <li><span class="check">✓</span> Custom Salesforce org setup help</li>
+      <li><span class="check">✓</span> Monthly 1:1 strategy call</li>
+      <li><span class="check">✓</span> Dedicated WhatsApp support</li>
+    </ul>
+    <a href="https://rzp.io/rzp/4TTi5p7a" class="cta-btn cta-outline" target="_blank">Start Free Trial →</a>
+  </div>
+
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h3>Frequently Asked Questions</h3>
+
+  <div class="faq-item">
+    <h4>What is the SF Copilot?</h4>
+    <p>An AI-powered assistant for Salesforce Admins. Ask anything — Flows, SOQL, Apex, Validation Rules, Permissions, errors — and get expert, production-ready answers in seconds.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>How does the free trial work?</h4>
+    <p>You get 7 days free when you subscribe. No charge until day 8. Cancel anytime before that and you won't be billed.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>Can I cancel anytime?</h4>
+    <p>Yes — cancel from your Razorpay subscription portal anytime. No questions asked. Your access continues until the end of the billing period.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>What payment methods are accepted?</h4>
+    <p>UPI, all major credit/debit cards, net banking, and wallets — via Razorpay. 100% secure.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4>I already bought the ₹749 one-time access. What happens?</h4>
+    <p>Your access continues. Email us at suryasdigitalaisolutions@gmail.com and we'll give you 12 months of Starter free as a thank-you for being an early supporter.</p>
+  </div>
+
+</div>
+
+<div class="footer">
+  Salesforce Admin AI Copilot · Powered by Claude AI · Built by Surya VJ
+</div>
+
+</body>
+</html>
