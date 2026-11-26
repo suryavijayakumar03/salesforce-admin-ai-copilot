@@ -50,8 +50,8 @@ It responds like a **senior Salesforce Admin with 10+ years of experience** — 
 
 **1. Clone the repo**
 ```bash
-git clone https://github.com/suryavijayakumar03/salesforce-copilot.git
-cd salesforce-copilot
+git clone https://github.com/suryavijayakumar03/salesforce-admin-ai-copilot.git
+cd salesforce-admin-ai-copilot
 ```
 
 **2. Install dependencies**
